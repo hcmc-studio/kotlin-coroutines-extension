@@ -18,7 +18,7 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             groupId = "studio.hcmc"
-            artifactId = "kotlin-protocol-extension"
+            artifactId = "kotlin-coroutines-extension"
             version = "0.0.4"
             from(components["java"])
         }
