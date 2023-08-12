@@ -1,17 +1,21 @@
+val project_version: String by project
+val jdk_version: String by project
+val kotlinx_coroutines_version: String by project
+
 plugins {
-    kotlin("jvm") version "1.9.0"
+    kotlin("jvm")
     id("maven-publish")
 }
 
 group = "studio.hcmc"
-version = "0.0.13"
+version = project_version
 
 repositories {
     mavenCentral()
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(jdk_version.toInt())
 }
 
 publishing {
@@ -19,12 +23,12 @@ publishing {
         create<MavenPublication>("maven") {
             groupId = "studio.hcmc"
             artifactId = "kotlin-coroutines-extension"
-            version = "0.0.13"
+            version = project_version
             from(components["java"])
         }
     }
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines_version")
 }
