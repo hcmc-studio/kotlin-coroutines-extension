@@ -54,6 +54,36 @@ interface ExecutorCoroutineDispatcherConfig {
     }
 }
 
+fun ExecutorCoroutineDispatcherConfig.Companion.fixed(nThreads: Int): ExecutorCoroutineDispatcherConfig {
+    return ExecutorCoroutineDispatcherConfig {
+        this.corePoolSize = nThreads
+        this.maximumPoolSize = nThreads
+        this.keepAliveTime = 0L
+        this.timeUnit = TimeUnit.MILLISECONDS
+        this.workQueue = LinkedBlockingQueue()
+    }
+}
+
+fun ExecutorCoroutineDispatcherConfig.Companion.single(): ExecutorCoroutineDispatcherConfig {
+    return ExecutorCoroutineDispatcherConfig {
+        this.corePoolSize = 1
+        this.maximumPoolSize = 1
+        this.keepAliveTime = 0L
+        this.timeUnit = TimeUnit.MILLISECONDS
+        this.workQueue = LinkedBlockingQueue()
+    }
+}
+
+fun ExecutorCoroutineDispatcherConfig.Companion.cached(): ExecutorCoroutineDispatcherConfig {
+    return ExecutorCoroutineDispatcherConfig {
+        this.corePoolSize = 0
+        this.maximumPoolSize = Int.MAX_VALUE
+        this.keepAliveTime = 60L
+        this.timeUnit = TimeUnit.MINUTES
+        this.workQueue = SynchronousQueue()
+    }
+}
+
 fun ExecutorCoroutineDispatcherConfig.createExecutorService(): ThreadPoolExecutor {
     return ThreadPoolExecutor(
         /* corePoolSize = */    corePoolSize,
