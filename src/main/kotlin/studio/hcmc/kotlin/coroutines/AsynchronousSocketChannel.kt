@@ -36,6 +36,10 @@ suspend fun AsynchronousSocketChannel.readAsync(
     }
 }
 
+suspend fun AsynchronousSocketChannel.readAllAsync(bufferSize: Int = DEFAULT_BUFFER_SIZE): ByteBuffer {
+    return readAllAsync(bufferSize) { readAsync(it) }
+}
+
 suspend fun AsynchronousSocketChannel.writeAsync(
     src: ByteBuffer,
     timeout: Long = 0L,
