@@ -3,6 +3,7 @@ package studio.hcmc.kotlin.coroutines
 import java.net.SocketAddress
 import java.nio.ByteBuffer
 import java.nio.channels.AsynchronousSocketChannel
+import java.nio.channels.CompletionHandler
 import java.util.concurrent.TimeUnit
 import kotlin.coroutines.suspendCoroutine
 
@@ -37,7 +38,7 @@ suspend fun AsynchronousSocketChannel.readAsync(
 }
 
 suspend fun AsynchronousSocketChannel.readAllAsync(bufferSize: Int = DEFAULT_BUFFER_SIZE): ByteBuffer {
-    return readAllAsync(bufferSize) { readAsync(it) }
+    return readAllAsync(bufferSize) { dst, _ -> readAsync(dst) }
 }
 
 suspend fun AsynchronousSocketChannel.writeAsync(

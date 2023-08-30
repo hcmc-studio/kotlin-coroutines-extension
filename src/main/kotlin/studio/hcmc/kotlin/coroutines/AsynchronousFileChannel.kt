@@ -27,7 +27,7 @@ suspend fun AsynchronousFileChannel.readAsync(
 }
 
 suspend fun AsynchronousFileChannel.readAllAsync(bufferSize: Int = DEFAULT_BUFFER_SIZE): ByteBuffer {
-    return readAllAsync(bufferSize) { readAsync(it) }
+    return readAllAsync(bufferSize) { dst, offset -> readAsync(dst, offset) }
 }
 
 suspend fun AsynchronousFileChannel.writeAsync(

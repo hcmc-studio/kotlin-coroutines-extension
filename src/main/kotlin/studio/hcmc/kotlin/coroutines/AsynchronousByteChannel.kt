@@ -17,7 +17,7 @@ suspend fun AsynchronousByteChannel.readAsync(dst: ByteBuffer): Int {
  * @throws IllegalArgumentException [bufferSize]가 0일 때
  */
 suspend fun AsynchronousByteChannel.readAllAsync(bufferSize: Int = DEFAULT_BUFFER_SIZE): ByteBuffer {
-    return readAllAsync(bufferSize) { readAsync(it) }
+    return readAllAsync(bufferSize) { dst, _ -> readAsync(dst) }
 }
 
 suspend fun AsynchronousByteChannel.writeAsync(src: ByteBuffer): Int {

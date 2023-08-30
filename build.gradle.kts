@@ -43,4 +43,6 @@ publishing {
 
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines_version")
+
+    testImplementation(kotlin("test"))
 }
