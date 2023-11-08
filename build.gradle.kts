@@ -1,6 +1,7 @@
 val project_version: String by project
 val jdk_version: String by project
 val kotlinx_coroutines_version: String by project
+val kotlinx_datetime_version: String by project
 
 plugins {
     kotlin("jvm")
@@ -43,6 +44,7 @@ publishing {
 
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines_version")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime-jvm:$kotlinx_datetime_version")
 
     testImplementation(kotlin("test"))
 }
